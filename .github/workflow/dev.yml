@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu 20.04
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v3
       with:
         python-version: 3.9
 
@@ -21,18 +21,18 @@ jobs:
 
     - name: Run linting
       run: |
-        flake8.interpreter tinyLife/
+        flake8 --exclude=tinyLife Neza-ML-Model
         
     - name: Run tests
       run: |
-        pytest tinylifeML/
+        pytest -c pytest.ini
 
 
     - name: Train ML model
-      run: python train.py
+      run: python3 train.py
 
     - name: Evaluate model
-      run: python evaluate.py
+      run: python3 evaluate.py
 
     - name: Execute Jupyter Notebooks
       run: |
