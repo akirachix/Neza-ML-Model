@@ -18,10 +18,14 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
 
-    - name: Run linting and tests
+    - name: Run linting
       run: |
-        flake8
-        pytest
+        flake8.interpreter tinyLife/
+        
+    - name: Run tests
+      run: |
+        pip install pytest
+        pytest tinylifeML/
 
     - name: Train ML model
       run: python train.py
