@@ -1,0 +1,36 @@
+name: CI/CD
+on:
+  push:
+    branches:
+      - dev
+jobs:
+  build:
+    runs-on: ubuntu 20.04
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Run linting and tests
+      run: |
+        flake8
+        pytest
+
+    - name: Train ML model
+      run: python train.py
+
+    - name: Evaluate model
+      run: python evaluate.py
+
+    - name: Execute Jupyter Notebooks
+      run: |
+        jupyter nbconvert --to notebook --execute tinyLife.ipynb
+        
+        
