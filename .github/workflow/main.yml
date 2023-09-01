@@ -20,11 +20,12 @@ jobs:
 
     - name: Run linting
       run: |
-        flake8.interpreter tinyLife/
+        flake8 --exclude=tinyLife Neza-ML-Model
         
     - name: Run tests
       run: |
-        pytest tinylifeML/
+        pytest -c pytest.ini
+
 
     - name: Train ML model
       run: python train.py
