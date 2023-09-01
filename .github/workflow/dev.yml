@@ -1,0 +1,41 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - dev
+jobs:
+  build:
+    runs-on: ubuntu 20.04
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: 3.9
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Run linting
+      run: |
+        flake8 --exclude=tinyLife Neza-ML-Model
+        
+    - name: Run tests
+      run: |
+        pytest -c pytest.ini
+
+
+    - name: Train ML model
+      run: python3 train.py
+
+    - name: Evaluate model
+      run: python3 evaluate.py
+
+    - name: Execute Jupyter Notebooks
+      run: |
+        jupyter nbconvert --to notebook --execute tinyLife.ipynb
+        
+        
