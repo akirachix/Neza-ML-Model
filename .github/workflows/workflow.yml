@@ -2,7 +2,14 @@ name: CI/CD
 on:
   push:
     branches:
-      - main
+       main
+       dev
+       staging
+  pull_request:
+    branches:
+       main
+       dev
+       staging
 jobs:
   build:
     runs-on: ubuntu 20.04
@@ -26,12 +33,16 @@ jobs:
       run: |
         pytest -c pytest.ini
 
-
     - name: Train ML model
       run: python train.py
 
     - name: Evaluate model
       run: python evaluate.py
+
+    - name: Install requirements # install application requirements
+      run: pip install -r requirements.txt
+    - name: Check Syntax # check code formatting
+      run: pre-commit run --all-files
 
     - name: Execute Jupyter Notebooks
       run: |
