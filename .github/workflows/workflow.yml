@@ -9,8 +9,7 @@ on:
     branches:
        -main
        -dev
-       -staging
-       
+       -staging       
   workflow_dispatch:
 
 jobs:
