@@ -10,6 +10,9 @@ on:
        -main
        -dev
        -staging
+       
+  workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu 20.04
