@@ -39,9 +39,9 @@ jobs:
     - name: Evaluate model
       run: python evaluate.py
 
-    - name: Install requirements # install application requirements
+    - name: Install requirements
       run: pip install -r requirements.txt
-    - name: Check Syntax # check code formatting
+    - name: Check Syntax
       run: pre-commit run --all-files
 
     - name: Execute Jupyter Notebooks
