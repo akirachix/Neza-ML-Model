@@ -1,0 +1,54 @@
+name: Python CI/CD
+on:
+  push:
+    branches:
+       -main
+       -dev
+       -staging
+  pull_request:
+    branches:
+       -main
+       -dev
+       -staging       
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Run linting
+      run: |
+        flake8 --exclude=tinyLife Neza-ML-Model
+        
+    - name: Run tests
+      run: |
+        pytest -c pytest.ini
+
+    - name: Train ML model
+      run: python train.py
+
+    - name: Evaluate model
+      run: python3 evaluate.py
+
+    - name: Install requirements
+      run: pip install -r requirements.txt
+      
+    - name: Check Syntax
+      run: pre-commit run --all-files
+
+    - name: Execute Jupyter Notebooks
+      run: |
+        jupyter nbconvert --to notebook --execute tinyLife.ipynb
+        
+        
