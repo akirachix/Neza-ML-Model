@@ -1,0 +1,1 @@
+2023-10-26 09:04:36,634 - my_logger - ERROR - Error loading the model: [Errno 2] No such file or directory: 'neza_model.joblib'
