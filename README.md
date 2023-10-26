@@ -1,3 +1,4 @@
+
 ## Description
 Welcome to the TinyLife Wellness Machine Learning Model!
 This is the machine learning model that predicts the risk level of lead exposure in Kenya depending on the variables trained on.
@@ -41,3 +42,9 @@ python train.py
 ```
 python evaluate.py 
 ```
+
+# Projects Template
+
+Collab Link
+
+https://colab.research.google.com/drive/1wsTwCiBZD3c-1THKZfIXR8Hm4Sm_7xyp
